@@ -1,0 +1,1 @@
+# odoo-openupgrade-migrate-sh
