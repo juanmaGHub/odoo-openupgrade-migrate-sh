@@ -1,0 +1,8 @@
+# Environments
+.env
+
+# Database files
+*.sql
+
+# Migration files
+migration/
