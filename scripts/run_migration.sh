@@ -39,6 +39,7 @@ echo "db_port = $DB_PORT" >> ../odoo.conf
 echo "db_user = $DB_USER" >> ../odoo.conf
 echo "db_password = $DB_PASSWORD" >> ../odoo.conf
 echo "db_name = $DB_NAME" >> ../odoo.conf
+echo "logfile = $PWD/../odoo-migration.log" >> ../odoo.conf
 
 # Run the migration script
 if [ $ODOO_TARGET_VERSION_INT -ge 14 ]; then
@@ -47,6 +48,11 @@ if [ $ODOO_TARGET_VERSION_INT -ge 14 ]; then
 else
     echo "addons_path = $PWD/addons,$PWD/odoo/addons" >> ../odoo.conf
     python odoo-bin -c $PWD/../odoo.conf -u all --stop-after-init
+fi
+
+# Check for errors in the log file
+if grep -q "ERROR $DB_NAME" $PWD/../odoo-migration.log; then
+    echo "Error detected in Odoo/OpenUpgrade logs."
 fi
 
 # Deactivate virtual environment and delete it
