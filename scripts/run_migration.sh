@@ -22,6 +22,13 @@ read -p "Ready to continue? (y/n) " -n 1 -r
 echo
 
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Migration aborted."
+    # cleanup
+    pyenv deactivate
+    pyenv virtualenv-delete -f $environment_name
+    
+    cd ../../scripts
+    source ./clean_workspace.sh
     exit 1
 fi
 

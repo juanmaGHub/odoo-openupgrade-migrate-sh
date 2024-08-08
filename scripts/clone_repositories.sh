@@ -6,6 +6,8 @@ source ./helper_functions.sh
 # Odoo (required for versions greater than 13.0)
 ODOO_REPO=https://github.com/odoo/odoo.git
 ODOO_BRANCH=$ODOO_TARGET_VERSION
+ODOO_OCB_RELEASE=${ODOO_TARGET_VERSION}_2024-07-14
+ODOO_OCB_REPO=https://git.coopdevs.org/coopdevs/odoo/OCB/-/archive/$ODOO_OCB_RELEASE/OCB-$ODOO_OCB_RELEASE.tar.gz
 export ODOO_FOLDER=$(get_repo_local_folder $ODOO_REPO $ODOO_TARGET_VERSION_INT)
 
 # OpenUpgrade
@@ -29,7 +31,13 @@ cd ../migration
 
 # Odoo is only cloned for versions greater than 13.0
 if [ $ODOO_TARGET_VERSION_INT -ge 14 ]; then
-    clone_repo $ODOO_REPO $ODOO_BRANCH $ODOO_TARGET_VERSION_INT
+    read -p "Do you want to clone Odoo from OCB repository? (y/n) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        clone_OCB_repo $ODOO_OCB_REPO $ODOO_OCB_RELEASE $ODOO_TARGET_VERSION_INT
+    else
+        clone_repo $ODOO_REPO $ODOO_BRANCH $ODOO_TARGET_VERSION_INT
+    fi
 fi
 clone_repo $OPENUPGRADE_REPO $OPENUPGRADE_BRANCH $ODOO_TARGET_VERSION_INT
 clone_repo $PYPI_SCRAPER_REPO $PYPI_SCRAPER_BRANCH ""
