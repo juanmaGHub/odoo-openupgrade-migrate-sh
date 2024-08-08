@@ -126,4 +126,4 @@ During execution if a ```.bash_profile``` script is found a prompt asking if to 
 
 After the extra addons requirements update, the scrip will also pause until the user decides. This allows to resolve missing dependencies (see odoo-addon-pypi-scraper/data/missing-requirements`<version>`.txt)
 
-Once the script start you can check the logs by tailing ```migration/odoo-migration.log``` folder.
+Once the script starts you can check the logs by tailing ```migration/odoo-migration.log``` folder.
