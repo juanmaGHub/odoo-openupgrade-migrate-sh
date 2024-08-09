@@ -11,7 +11,7 @@ ODOO_OCB_REPO=https://git.coopdevs.org/coopdevs/odoo/OCB/-/archive/$ODOO_OCB_REL
 export ODOO_FOLDER=$(get_repo_local_folder $ODOO_REPO $ODOO_TARGET_VERSION_INT)
 
 # OpenUpgrade
-OPENUPGRADE_REPO=https://github.com/OCA/OpenUpgrade.git
+OPENUPGRADE_REPO=https://github.com/somitcoop/OpenUpgrade.git
 OPENUPGRADE_BRANCH=$ODOO_TARGET_VERSION
 export OPENUPGRADE_FOLDER=$(get_repo_local_folder $OPENUPGRADE_REPO $ODOO_TARGET_VERSION_INT)
 
