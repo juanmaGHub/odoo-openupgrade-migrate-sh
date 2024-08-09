@@ -4,9 +4,13 @@ read -p "Do you want to restore the database from a dump file? (y/n)" -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     cd backup
+    ODOO_TARGET_VERSION_INT=$(echo $ODOO_TARGET_VERSION | sed 's/\.0//')
 
-    if [ ! -f dump.sql ]; then
-        echo "No dump.sql found."
+    DUMPFILE=dump$(($ODOO_TARGET_VERSION_INT - 1)).sql
+    echo "Restoring database from $DUMPFILE"
+
+    if [ ! -f $DUMPFILE ]; then
+        echo "No $DUMPFILE found."
         echo "Please place the dump.sql file in /backup folder in this script directory."
         exit 1
     fi
@@ -16,7 +20,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         dropdb -h $DB_HOST -U $DB_USER $DB_NAME
     fi
     createdb -h $DB_HOST -U $DB_USER $DB_NAME
-    psql -h $DB_HOST -U $DB_USER -d $DB_NAME < dump.sql
+    psql -h $DB_HOST -U $DB_USER -d $DB_NAME < $DUMPFILE
 
     unset PGPASSWORD
     

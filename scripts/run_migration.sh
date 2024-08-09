@@ -47,6 +47,7 @@ echo "db_user = $DB_USER" >> ../odoo.conf
 echo "db_password = $DB_PASSWORD" >> ../odoo.conf
 echo "db_name = $DB_NAME" >> ../odoo.conf
 echo "logfile = $PWD/../odoo-migration.log" >> ../odoo.conf
+# echo "data_dir = $PWD/../../../data_dir" >> ../odoo.conf
 
 # Run the migration script
 if [ $ODOO_TARGET_VERSION_INT -ge 14 ]; then

@@ -50,4 +50,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     source ./clean_workspace.sh
 fi
 
+cd ../backup
+pg_dump -U $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -f dump$ODOO_TARGET_VERSION_INT.sql
+
 cd ..
+echo "Migration completed successfully."
