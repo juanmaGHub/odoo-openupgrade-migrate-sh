@@ -13,16 +13,6 @@ sudo apt update
 sudo apt install postgresql postgresql-contrib
 ```
 
-#### For macOS (using Homebrew):
-```bash
-brew update
-brew install postgresql
-brew services start postgresql
-```
-
-#### For Windows:
-Download the installer from the official PostgreSQL website (https://www.postgresql.org/download/windows/) and follow the installation instructions.
-
 ### 2. Restore Backup of the Database to Migrate
 #### 1. Create odoo user
 ```bash
@@ -73,8 +63,6 @@ ODOO_INVENTORY_BRANCH=project_inventory_repo_branch
 ### 4. Install Pyenv
 pyenv is used to manage multiple Python versions. Install and set up pyenv on your local machine by following the steps below:
 
-#### For Ubuntu/Debian:
-
 ```bash
 curl https://pyenv.run | bash
 ```
@@ -93,28 +81,6 @@ Restart your shell:
 ```bash
 exec "$SHELL"
 ```
-
-#### For macOS (using Homebrew):
-
-```bash
-brew update
-brew install pyenv
-Add the following lines to your .bash_profile or .zshrc file:
-```
-```bash
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-```
-
-Restart your shell:
-
-```bash
-exec "$SHELL"
-```
-
 
 
 ## Usage
