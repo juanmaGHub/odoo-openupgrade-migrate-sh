@@ -40,6 +40,14 @@ if [ $ODOO_TARGET_VERSION_INT -ge 14 ]; then
     fi
 fi
 clone_repo $OPENUPGRADE_REPO $OPENUPGRADE_BRANCH $ODOO_TARGET_VERSION_INT
+
+# patch to migrate project_status on version 15.0
+if [ $ODOO_TARGET_VERSION_INT -eq 15 ]; then
+    cd $OPENUPGRADE_FOLDER
+    git checkout 15.0-add-project_status
+    cd ..
+fi
+
 clone_repo $PYPI_SCRAPER_REPO $PYPI_SCRAPER_BRANCH ""
 clone_repo $ODOO_INVENTORY_REPO $ODOO_INVENTORY_BRANCH ""
 
