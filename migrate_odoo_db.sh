@@ -43,15 +43,15 @@ source ./inventory_requirements.sh
 # Create migration environment and run the migration script
 source ./run_migration.sh
 
+cd ../backup
+pg_dump -U $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -f dump$ODOO_TARGET_VERSION_INT.sql
+
+cd ../scripts
+
 # Clean workspace
 read -p "Do you want to clean the workspace? (y/n)" -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     source ./clean_workspace.sh
 fi
-
-cd ../backup
-pg_dump -U $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -f dump$ODOO_TARGET_VERSION_INT.sql
-
-cd ..
 echo "Migration completed successfully."
