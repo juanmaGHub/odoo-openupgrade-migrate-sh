@@ -44,6 +44,7 @@ source ./inventory_requirements.sh
 source ./run_migration.sh
 
 cd ../backup
+rm -rf dump$ODOO_TARGET_VERSION_INT.sql
 pg_dump -U $DB_USER -h $DB_HOST -p $DB_PORT -d $DB_NAME -f dump$ODOO_TARGET_VERSION_INT.sql
 
 cd ../scripts
