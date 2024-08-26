@@ -4,7 +4,7 @@
 rm -rf ../migration/$ODOO_FOLDER
 rm -rf ../migration/$OPENUPGRADE_FOLDER
 rm -rf ../migration/odoo.conf
-# rm -rf ../migration/odoo-migration.log
+rm -rf ../migration/odoo-migration.log
 
 # Unset the environment variables
 unset ODOO_TARGET_VERSION
