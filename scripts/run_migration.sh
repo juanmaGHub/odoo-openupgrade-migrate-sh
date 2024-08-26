@@ -37,6 +37,11 @@ pip install -r ../$PYPI_SCRAPER_FOLDER/data/requirements-$ODOO_TARGET_VERSION_IN
 # ensure that the latest version of openupgradelib is installed
 pip install git+https://github.com/OCA/openupgradelib.git@master#egg=openupgradelib --upgrade
 
+# prepare filestore
+DATA_DIR=$PWD/../../backup/data_dir$ODOO_TARGET_VERSION_INT
+rm -rf $DATA_DIR
+cp -r $PWD/../../backup/data_dir$(($ODOO_TARGET_VERSION_INT - 1)) $DATA_DIR
+
 # Prepare odoo.conf file with database connection details
 touch ../odoo.conf
 > ../odoo.conf
@@ -47,7 +52,10 @@ echo "db_user = $DB_USER" >> ../odoo.conf
 echo "db_password = $DB_PASSWORD" >> ../odoo.conf
 echo "db_name = $DB_NAME" >> ../odoo.conf
 echo "logfile = $PWD/../odoo-migration.log" >> ../odoo.conf
-# echo "data_dir = $PWD/../../../data_dir" >> ../odoo.conf
+echo "data_dir = $DATA_DIR" >> ../odoo.conf
+
+read -p "Please make sure that the database is backed up before continuing. Ready to continue? (y/n) " -n 1 -r
+echo
 
 # Run the migration script
 if [ $ODOO_TARGET_VERSION_INT -ge 14 ]; then
